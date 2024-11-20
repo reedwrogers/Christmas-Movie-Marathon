@@ -4,13 +4,13 @@ from email.mime.text import MIMEText
 from datetime import datetime, timedelta
 
 # Connect to the SQLite database
-db_path = "/Users/reed/Desktop/Personal-Projects/Christmas-Movie-Marathon/movie_watchers.db"  # Replace with your database path
+db_path = "movie_watchers.db"  # Replace with your database path
 conn = sqlite3.connect(db_path)
 cursor = conn.cursor()
 
 # Get the current date
 # current_date = datetime.now().strftime("%Y-%m-%d")
-current_date = 1 # need to grab the current day, not the date
+current_date = datetime.now().day
 
 # Query the movie for today's date
 cursor.execute("SELECT movie_name FROM movies WHERE date_using = ?", (current_date,))
