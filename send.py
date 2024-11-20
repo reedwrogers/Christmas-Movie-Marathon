@@ -19,14 +19,14 @@ movie = cursor.fetchone()
 if movie:
     movie_name = movie[0]
     message_body = f"""
-Hello! Today's movie is **{movie_name}**. Please answer the following questions:
+1. Did you watch? ('1 Y' for yes, '1 N' for no).
 
-1. Did you watch the movie? Reply '1 Y' for Yes or '1 N' for No.
-2. What do you rate the movie on a scale from 1 to 10? Reply '2 [your rating]'.
-3. What is one word you would use to describe this movie? Reply '3 [your word]'.
+2. '2 [rating]' (1 through 10).
 
-Thank you for participating!
-    """
+3. '3 [word]' (Describe in 1 word).
+
+Thanks!
+"""
 
     # Query all watchers
     cursor.execute("SELECT name, phone_number FROM watchers WHERE name = 'Reed'")
