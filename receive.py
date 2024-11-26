@@ -13,7 +13,7 @@ cursor = conn.cursor()
 # Email connection
 imap_server = "imap.gmail.com"
 email_address = "reedwrogers@gmail.com"  # Replace with your email
-email_password = "pwd"  # Replace with your email password
+email_password = "tabq wbts lena trwu"  # Replace with your email password
 
 with imaplib.IMAP4_SSL(imap_server) as mail:
     mail.login(email_address, email_password)
@@ -32,7 +32,6 @@ with imaplib.IMAP4_SSL(imap_server) as mail:
                 sender = msg["From"]
                 if isinstance(subject, bytes):
                     subject = subject.decode()
-
                 # If the message has a plain text part
                 if msg.is_multipart():
                     for part in msg.walk():
@@ -46,20 +45,20 @@ with imaplib.IMAP4_SSL(imap_server) as mail:
                 response_match = re.match(r"(\d+) (.+)", body.strip())
                 if response_match:
                     response_type = int(response_match.group(1))
-                    response = response_match.group(2)
+                    response = response_match.group(2).strip('\r')
 
                     # Lookup watcher ID and movie from the sender
                     phone_number = re.search(r"(\d+)@txt.att.net", sender).group(1)
                     cursor.execute("SELECT rowid FROM watchers WHERE phone_number = ?", (phone_number,))
                     watcher_id = cursor.fetchone()
-
+                
                     if watcher_id:
                         watcher_id = watcher_id[0]
-                        cursor.execute("SELECT movie_name FROM movies WHERE date_using = ?", (1,)) # "1" here should be the current day
+                        cursor.execute("SELECT movie_name FROM movies WHERE date_using = ?", (datetime.now().day,)) # "1" here should be the current day
                         movie = cursor.fetchone()
 
                         if movie:
-                            movie_name = movie[0]
+                            movie_name = subject.split(": ", 1)[-1]
                             print(movie_name)
                             timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 

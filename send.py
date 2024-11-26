@@ -9,8 +9,7 @@ conn = sqlite3.connect(db_path)
 cursor = conn.cursor()
 
 # Get the current date
-# current_date = datetime.now().strftime("%Y-%m-%d")
-current_date = datetime.now().day
+current_date = datetime.now().day - 1
 
 # Query the movie for today's date
 cursor.execute("SELECT movie_name FROM movies WHERE date_using = ?", (current_date,))
@@ -25,18 +24,23 @@ if movie:
 
 3. '3 [word]' (Describe in 1 word).
 
-Thanks!
+SAMPLE RESPONSE (3 texts, notice the space"):
+
+1 Y
+2 5.5
+3 boring
+
 """
 
     # Query all watchers
-    cursor.execute("SELECT name, phone_number FROM watchers WHERE name = 'Reed'")
+    cursor.execute("SELECT name, phone_number FROM watchers")
     watchers = cursor.fetchall()
 
-    # Set up the SMTP server (use your email provider's settings)
+    # Set up the SMTP server (use your email provider's settings)x
     smtp_server = "smtp.gmail.com"
     smtp_port = 587
     email_address = "reedwrogers@gmail.com"  # Replace with your email
-    email_password = "pwd"  # Replace with your email password
+    email_password = "tabq wbts lena trwu"  # Replace with your email password
 
     with smtplib.SMTP(smtp_server, smtp_port) as server:
         server.starttls()
