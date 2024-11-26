@@ -33,7 +33,7 @@ SAMPLE RESPONSE (3 texts, notice the space"):
 """
 
     # Query all watchers
-    cursor.execute("SELECT name, phone_number FROM watchers")
+    cursor.execute("SELECT name, phone_number FROM watchers WHERE name in ('Reed')")
     watchers = cursor.fetchall()
 
     # Set up the SMTP server (use your email provider's settings)x
