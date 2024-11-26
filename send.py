@@ -9,7 +9,7 @@ conn = sqlite3.connect(db_path)
 cursor = conn.cursor()
 
 # Get the current date, can just subtract 1 from the next day because we will always send this at 9 PM CST
-current_date = datetime.now().day - 2
+current_date = datetime.now().day - 1
 
 # Query the movie for today's date
 cursor.execute("SELECT movie_name FROM movies WHERE date_using = ?", (current_date,))

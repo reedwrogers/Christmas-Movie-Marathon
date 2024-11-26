@@ -54,7 +54,7 @@ with imaplib.IMAP4_SSL(imap_server) as mail:
                 
                     if watcher_id:
                         watcher_id = watcher_id[0]
-                        cursor.execute("SELECT movie_name FROM movies WHERE date_using = ?", (datetime.now().day - 2,)) # "1" here should be the current day
+                        cursor.execute("SELECT movie_name FROM movies WHERE date_using = ?", (datetime.now().day - 1,)) # "1" here should be the current day
                         movie = cursor.fetchone()
 
 
