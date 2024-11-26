@@ -6,7 +6,7 @@ from datetime import datetime, timedelta
 import re
 
 # Database connection
-db_path = "/Users/reed/Desktop/Personal-Projects/Christmas-Movie-Marathon/movie_watchers.db"  # Replace with your database path
+db_path = "./movie_watchers.db"  # Replace with your database path
 conn = sqlite3.connect(db_path)
 cursor = conn.cursor()
 
@@ -54,8 +54,9 @@ with imaplib.IMAP4_SSL(imap_server) as mail:
                 
                     if watcher_id:
                         watcher_id = watcher_id[0]
-                        cursor.execute("SELECT movie_name FROM movies WHERE date_using = ?", (datetime.now().day,)) # "1" here should be the current day
+                        cursor.execute("SELECT movie_name FROM movies WHERE date_using = ?", (datetime.now().day - 2,)) # "1" here should be the current day
                         movie = cursor.fetchone()
+
 
                         if movie:
                             movie_name = subject.split(": ", 1)[-1]
